@@ -310,9 +310,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const causeType = this.getAttribute('data-cause');
             
             // Add click animation
-            this.style.transform = 'translateX(-50%) scale(0.95)';
+            this.style.transform = 'translateX(-50%) translateY(-2px) scale(0.95)';
+            this.style.background = 'linear-gradient(135deg, #ff5722, #e64a19)';
             setTimeout(() => {
-                this.style.transform = 'translateX(-50%) translateY(-4px)';
+                this.style.transform = 'translateX(-50%) translateY(0)';
             }, 150);
             
             // Store cause preference in localStorage for donate page
@@ -321,9 +322,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Add loading state
-            const originalText = this.textContent;
-            this.textContent = 'Redirecting...';
+            const buttonSpan = this.querySelector('span');
+            const originalText = buttonSpan.textContent;
+            buttonSpan.textContent = 'Redirecting...';
             this.style.background = 'linear-gradient(135deg, #9ca3af, #6b7280)';
+            this.style.cursor = 'not-allowed';
+            this.disabled = true;
             
             // Redirect to donate page after short delay
             setTimeout(() => {
@@ -336,14 +340,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Enhanced hover effects for cause donate buttons
         button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateX(-50%) translateY(-6px) scale(1.05)';
-            this.style.boxShadow = '0 12px 32px rgba(255, 152, 105, 0.5)';
+            if (!this.disabled) {
+                this.style.transform = 'translateX(-50%) translateY(-6px) scale(1.05)';
+                this.style.boxShadow = '0 12px 32px rgba(255, 152, 105, 0.6)';
+                this.style.background = 'linear-gradient(135deg, #ff7433, #ff5722)';
+            }
         });
         
         button.addEventListener('mouseleave', function() {
-            if (this.textContent !== 'Redirecting...') {
-                this.style.transform = 'translateX(-50%) translateY(-4px) scale(1)';
+            if (!this.disabled) {
+                this.style.transform = 'translateX(-50%) translateY(0) scale(1)';
                 this.style.boxShadow = '0 8px 24px rgba(255, 152, 105, 0.4)';
+                this.style.background = 'linear-gradient(135deg, #ff9869, #ff7433)';
             }
         });
     });

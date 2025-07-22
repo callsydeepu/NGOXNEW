@@ -618,6 +618,63 @@ img {
     transform: translateY(-2px);
 }
 
+/* Donate Button Overlay Styles */
+.donate-btn-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: linear-gradient(135deg, #ff9869, #ff7433);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 10;
+    box-shadow: 0 4px 16px rgba(255, 152, 105, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.cause-card:hover .donate-btn-overlay {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.donate-btn-overlay:hover {
+    background: linear-gradient(135deg, #ff7433, #ff5722);
+    transform: translateX(-50%) translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(255, 152, 105, 0.5);
+}
+
+.donate-btn-overlay:active {
+    transform: translateX(-50%) translateY(-2px) scale(0.98);
+    box-shadow: 0 4px 16px rgba(255, 152, 105, 0.4);
+}
+
+/* Add pulse animation for attention */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 4px 16px rgba(255, 152, 105, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(255, 152, 105, 0.5);
+    }
+    100% {
+        box-shadow: 0 4px 16px rgba(255, 152, 105, 0.3);
+    }
+}
+
+.cause-card:hover .donate-btn-overlay {
+    animation: pulse 2s infinite;
+}
+
 /* About Section */
 .about {
     background-color: #fffeda;
@@ -4501,15 +4558,6 @@ img {
     to {
         opacity: 1;
         transform: translateX(0);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
     }
 }
 
