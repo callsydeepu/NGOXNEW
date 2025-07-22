@@ -299,6 +299,66 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Add functionality for cause card donate buttons
+    const causeDonateBtns = document.querySelectorAll('.donate-btn-overlay');
+    
+    causeDonateBtns.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent card click event
+            
+            // Get the cause type from data attribute
+            const causeType = this.getAttribute('data-cause');
+            
+            // Add click animation
+            this.style.transform = 'translateX(-50%) scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'translateX(-50%) translateY(-4px)';
+            }, 150);
+            
+            // Store cause preference in localStorage for donate page
+            if (causeType) {
+                localStorage.setItem('selectedCause', causeType);
+            }
+            
+            // Add loading state
+            const originalText = this.textContent;
+            this.textContent = 'Redirecting...';
+            this.style.background = 'linear-gradient(135deg, #9ca3af, #6b7280)';
+            
+            // Redirect to donate page after short delay
+            setTimeout(() => {
+                window.location.href = 'donate.html';
+            }, 800);
+            
+            // Show notification
+            showNotification(`Redirecting to donate for ${getCauseName(causeType)}...`, 'info');
+        });
+        
+        // Enhanced hover effects for cause donate buttons
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(-50%) translateY(-6px) scale(1.05)';
+            this.style.boxShadow = '0 12px 32px rgba(255, 152, 105, 0.5)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            if (this.textContent !== 'Redirecting...') {
+                this.style.transform = 'translateX(-50%) translateY(-4px) scale(1)';
+                this.style.boxShadow = '0 8px 24px rgba(255, 152, 105, 0.4)';
+            }
+        });
+    });
+    
+    // Helper function to get cause name
+    function getCauseName(causeType) {
+        const causeNames = {
+            'food': 'Food & Nutrition',
+            'animal': 'Animal Rescue & Care',
+            'orphanage': 'Orphanage Care & Support',
+            'education': 'Education for Children'
+        };
+        return causeNames[causeType] || 'Our Cause';
+    }
+    
     // Add hover effects for cause cards
     const existingCauseCards = document.querySelectorAll('.cause-card');
     

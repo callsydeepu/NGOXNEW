@@ -218,6 +218,47 @@
     transform: translateY(0);
 }
 
+/* Enhanced donate button styles for causes page */
+.cause-item .donate-btn-card {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff9869, #ff7433);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+    box-shadow: 0 4px 16px rgba(255, 152, 105, 0.3);
+    z-index: 2;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cause-item:hover .donate-btn-card {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.donate-btn-card:hover {
+    background: linear-gradient(135deg, #ff7433, #ff5722);
+    transform: translateX(-50%) translateY(-4px);
+    box-shadow: 0 8px 24px rgba(255, 152, 105, 0.4);
+}
+
+.donate-btn-card:active {
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 4px 16px rgba(255, 152, 105, 0.3);
+}
+
 /* Responsive Design */
 @media (max-width: 1440px) {
     .causes-hero {
